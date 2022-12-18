@@ -6,7 +6,7 @@ import { EditableInput, EditableInputRGBA, EditableInputHSLA } from '@uiw/react-
 function Settings() {
     const [hex, setHex] = useState(document.body.style.backgroundColor);
     const [toggle, setToggle] = useState(true);
-
+    //I want 100
     useEffect(() => {
         document.body.style.backgroundColor = hex;
     }, [hex]);
