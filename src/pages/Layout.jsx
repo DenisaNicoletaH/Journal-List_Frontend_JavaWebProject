@@ -4,6 +4,11 @@ import Navbar from "../Navbar";
 import { HeartSwitch } from '@anatoliygatt/heart-switch';
 import { useState } from "react";
 
+
+
+const formatter = buildFormatter(frenchStrings)
+
+
 const Layout = () => {
     const [checked, setChecked] = useState(false);
 

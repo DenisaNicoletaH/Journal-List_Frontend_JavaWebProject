@@ -6,7 +6,6 @@ import Settings from "./pages/Settings";
 import NoPages from "./pages/NoPages";
 import 'bootstrap/dist/css/bootstrap.css';
 
-
 export default function App() {
 
   return (

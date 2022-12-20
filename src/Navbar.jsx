@@ -17,7 +17,7 @@ function Navbar() {
                         <h1>Journal-List</h1>
                     </div>
 
-                    
+
                     <div className="col-2">
                         <button className="btn btn-secondary">
                             <Link style={{ textDecoration: 'none', color: "white" }} to="/Settings">Settings</Link>

@@ -12,7 +12,6 @@ function Home() {
             <div className='Container'>
                 <div className='row'>
                     <div className='col-2'>
-                        Hello
                     </div>
                     <div className='col-10'>
                         <JounalSquare />
