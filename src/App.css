@@ -1,8 +1,24 @@
-.ColorChangebtn {
-    background-color: aqua;
+.SettingButtons {
     text-align: center;
 }
 
-body {
-    overflow: scroll;
+.ColorChangebtn {
+    background-color: white;
+    border-color: white;
+    text-align: center;
+    font-weight: bold;
+
+}
+
+.Timebtn {
+    border-color: white;
+    background-color: white;
+    color: black;
+    font-weight: bold;
+}
+
+.FontSizebtn {
+    background-color: white;
+    border-color: white;
+    font-weight: bold;
 }

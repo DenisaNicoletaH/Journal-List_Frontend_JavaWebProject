@@ -1,10 +1,29 @@
 import './App.css';
+import JournalSquare from './components/JounalSquare';
+import ToWriteMessage from './components/ToWriteMessage';
+import { DateTime } from './components/TimeClock';
+import Layout from './pages/Layout';
 
 function App() {
   return (
-    //title
-    <div className='text-danger'>Hello</div>
+    <div>
 
+      <DateTime></DateTime>
+
+      <ToWriteMessage> </ToWriteMessage>
+
+      <Layout> </Layout>
+
+      <JournalSquare> </JournalSquare>
+
+
+    </div>
+
+
+    /*
+        //title
+        <div className='text-danger'>Hello</div>
+    */
 
 
 

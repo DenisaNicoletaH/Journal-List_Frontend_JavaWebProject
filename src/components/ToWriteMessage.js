@@ -1,16 +1,20 @@
 import React, { useState } from 'react'
+import JournalSquare from './JounalSquare';
 
 function Journal() {
+    /*
+    const [input, setInput] = useState("");
+    const [messages, setMessages] = useState([]);
 
     //Initial values = empty strings
-    const initalMessage = [{ id: " ", message: " ", complete: true }];
-
+/*
     const [message, setMessage] = useState(initalMessage);
 
     const toggleMessage = (id) => {
         //calls the initialmessage
         const toggleMessage = [...message];
         toggleMessage.map((messageList) => {
+
             //sets the id
             if (messageList.id == id) {
                 message.complete
@@ -26,11 +30,30 @@ function Journal() {
 
 
     }
+*/
+
+    /*
+    messages.map((item) => {
+        return (
+            <>
+                <ul>
+                    <JournalSquare key={messages.id}
+                        messages={messages.input}
+                        setCompleted={message.setCompleted}
+                        isDeleted={message.isDeleted}>
+
+                    </JournalSquare>
+                </ul>
 
 
-    return (
-        <> </>
 
-    )
+
+            </>
+
+
+
+        );
+    })
+  */  
 }
 export default Journal;

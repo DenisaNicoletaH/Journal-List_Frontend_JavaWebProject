@@ -13,26 +13,32 @@ function Settings() {
     return (
 
         <>
-            <div>
-                <button className="ColorChangebtn" onClick={() => { setToggle(!toggle); }}>Change Color </button>
-                {toggle && <Sketch
-                    style={{ marginLeft: 20 }}
-                    color={hex}
-                    onChange={(color) => {
-                        setHex(color.hex);
-                    }}
-                />}
+            <div className='SettingButtons'>
+                <div>
+                    <button className="ColorChangebtn" onClick={() => { setToggle(!toggle); }}>Change Color </button>
+                    {toggle && <Sketch
+                        style={{ marginLeft: 20}}
+                        color={hex}
+                        onChange={(color) => {
+                            setHex(color.hex);
+                        }}
+                    />}
 
-            </div>
+                </div>
 
-            <div>
-                <button className="FontSizebtn"> Font Size </button>
-            </div>
+                <div>
+                    <button className="FontSizebtn" onClick={() => { setToggle(!toggle); }}> Font Size </button>
+                   
+                    </div>
+              
+              
+              
+                </div>
 
-            <div>
-                <button className="Timebtn">Modify Time</button>
-            </div>
-
+                <div>
+                    <button className="Timebtn">Modify Time</button>
+                </div>
+            
         </>
     );
 }
