@@ -22,3 +22,19 @@
     border-color: white;
     font-weight: bold;
 }
+
+.Input {
+    background-color: white;
+    border-style: solid;
+    border-color: black;
+}
+
+.BorderColor {
+    background-color: black;
+    border-style: solid;
+}
+
+form {
+    size: 100px;
+    text-align: center;
+}

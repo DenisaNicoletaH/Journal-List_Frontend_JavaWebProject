@@ -6,11 +6,11 @@ import Layout from './pages/Layout';
 
 function App() {
   return (
+
+
     <div>
 
       <DateTime></DateTime>
-
-      <ToWriteMessage> </ToWriteMessage>
 
       <Layout> </Layout>
 

@@ -2,12 +2,13 @@ import React, { useState } from 'react'
 import JournalSquare from './JounalSquare';
 
 function Journal() {
+    
     /*
     const [input, setInput] = useState("");
     const [messages, setMessages] = useState([]);
 
     //Initial values = empty strings
-/*
+
     const [message, setMessage] = useState(initalMessage);
 
     const toggleMessage = (id) => {
@@ -30,9 +31,9 @@ function Journal() {
 
 
     }
-*/
 
-    /*
+
+    
     messages.map((item) => {
         return (
             <>
@@ -54,6 +55,6 @@ function Journal() {
 
         );
     })
-  */  
+  */
 }
 export default Journal;

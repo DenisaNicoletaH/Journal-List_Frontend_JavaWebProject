@@ -1,11 +1,12 @@
 import React from 'react';
 import { HeartSwitch } from '@anatoliygatt/heart-switch';
 import { useState } from 'react';
-import JounalSquare from '../components/JounalSquare';
+import JournalSquare from '../components/JounalSquare';
 import Robohash from 'react-robohash';
 import '../App.css';
 import ReactLiveTime from 'react-live-time';
 import '../components/ToWriteMessage';
+import FormMessages from '../components/FormMessage';
 
 //import TimeAgo from 'react-timeago';
 
@@ -15,7 +16,9 @@ function Home() {
 
         <>
 
+
             <div className='Container'>
+
                 <div className='row'>
 
                     <div className='border border-4 col-2'>
@@ -29,17 +32,19 @@ function Home() {
                     </div>
 
 
+
                     <div className='col-10'>
+                        <JournalSquare />
+                        <FormMessages />
 
-                        <div className='row'>
 
 
 
-                            <JounalSquare />
-                        </div>
                     </div>
                 </div>
             </div>
+
+
         </>
 
     );
