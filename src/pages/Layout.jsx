@@ -32,6 +32,8 @@ const Layout = () => {
                 <div className="row border">
 
 
+
+
                     <div className="col-1">
 
                     </div>
@@ -42,6 +44,10 @@ const Layout = () => {
                         <Outlet />
                     </div>
                 </div>
+
+
+
+             
                 <div className="col-1">
 
 

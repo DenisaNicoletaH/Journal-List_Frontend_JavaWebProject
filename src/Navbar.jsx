@@ -6,15 +6,23 @@ import { BrowserRouter, Route, Link } from "react-router-dom";
 import ReactLiveTime from 'react-live-time';
 import Robohash from 'react-robohash';
 import DateTime from "./components/TimeClock";
+import Settings from "./pages/Settings";
+import { useEffect } from "react";
 
 
 function Navbar() {
     const [checked, setChecked] = useState(false);
-
+    const [person, setPerson] = useState(false);
     //for  displaying the robot avatar
     const [display, setDisplay] = useState(false);
+    useEffect(() => {
+        setPerson(prompt("Please enter your name"));
+    }, []);
+    /*
     const [RandomName, setRandom] = useState((Math.random() + 1).toString(36).substring(7));
     const [Type, setType] = useState("cat");
+*/
+
 
     return (
         <nav className="border" style={{ height: '100px', padding: '30px' }}>
@@ -31,33 +39,9 @@ function Navbar() {
                     </div>
 
                     <div className="col-7 text-center">
-                        <h1 >Journal-List Of
 
-
-                            <span style={{ marginLeft: '30px' }}>
-                                <Robohash
-                                    name={RandomName}
-                                    type={Type}
-                                    size={50}
-                                    background={1}
-                                    gravatar={true} />
-
-                            </span>
-                            <button style={{ fontSize: '16px', borderColor: "white", backgroundColor: 'lightgrey' }} onClick={() => {
-                                setRandom(Math.random() + 1).toString(36).substring(7);
-                            }}>
-                                Change Avatar
-                            </button>
-                            <button style={{ fontSize: '16px', borderColor: "white", backgroundColor: 'lightgrey' }} onClick={() => {
-                                if (Type == "cat") {
-                                    setType("robots");
-                                } else {
-                                    setType("cat");
-                                }
-                            }}>
-                                Change Avatar Type
-                            </button>
-
+                        <h1>
+                            Journal-List Of {person}
                         </h1>
 
                     </div>
