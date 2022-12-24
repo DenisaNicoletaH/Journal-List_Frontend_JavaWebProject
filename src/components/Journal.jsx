@@ -4,24 +4,22 @@ import ReactTimeago from 'react-timeago';
 import TimeAgo from '../components/TimeAgo';
 
 function Journal({ item }) {
-    /*
-        if (item == true) {
-            <TimeAgo />
-        }
-        */
+
+
     return (
-     
+        <div className='ItemDescription'>
+            <li>
+                {item.description}
 
-  
-       <li>
-                
-                {item.description}   
-    
             </li>
-            
 
+
+            <div className='AddingFriend'>
+                sdf
+            </div>
+        </div>
     )
-  
+
 
 }
 

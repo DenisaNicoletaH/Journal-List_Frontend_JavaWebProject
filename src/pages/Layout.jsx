@@ -31,29 +31,30 @@ const Layout = () => {
 
                 <div className="row border">
 
+                  
 
 
 
-                    <div className="col-1">
-
-                    </div>
-                    <div className="col-10">
-
-
-
-                        <Outlet />
-                    </div>
-                </div>
-
-
-
-             
                 <div className="col-1">
 
-
                 </div>
+                <div className="col-10">
+
+
+
+                    <Outlet />
+                </div>
+            </div>
+
+
+
+
+            <div className="col-1">
+
 
             </div>
+
+        </div>
 
 
 

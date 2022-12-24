@@ -5,11 +5,15 @@ import ReactTimeago from 'react-timeago';
 import TimeAgo from './TimeAgo';
 
 function JournalSquare() {
-    //const initalMessage = [{ id: id, message: message, complete: false }];
 
     const [items, setItems] = useState([]);
+
+    const [friends, setFriends] = useState([])
+
+
+
     const loadTodosFromAPI = () => {
-        //get the request
+        //get the request messages
         axios.get('http://localhost:8080/api/messages')
             .then((response) => {
                 if (response.status === 200) {
@@ -21,6 +25,18 @@ function JournalSquare() {
                 console.log("This is an error" + error.status)
             })
 
+
+        //get friends
+        axios.get('http://localhost:8080/api/friends')
+            .then((response) => {
+                if (response.status === 200) {
+                    setFriends(response.data);
+                    console.log(response);
+                }
+            })
+            .catch(function (error) {
+                console.log("This is an error" + error.status)
+            })
 
 
     }
@@ -39,9 +55,25 @@ function JournalSquare() {
 
             })
             .catch(function (error) {
+                console.log(error);
+            })
+    }
+
+
+    const addFriends = (friend) => {
+
+        axios.post('http://localhost:8080/api/friends', friend)
+
+            .then(function (response) {
+                loadTodosFromAPI();
+
+            })
+            .catch(function (error) {
                 console.log('This is an error' + error);
             })
     }
+
+
 
 
 
@@ -53,40 +85,16 @@ function JournalSquare() {
 
         event.target.elements.description.value = "";
 
+    }
+    const friendsForm = (event) => {
+        event.preventDefault();
+        const friendName = event.target.elements.name.value;
+        const x = { userName: friendName };
+        addFriends(x);
 
-
+        event.target.elements.name.value = " ";
 
     }
-
-
-    /*
-    const formMessages = (event) => {
-        event.preventDefault();
-        var description = event.target.elements.description.value;
-        if (description.length >= 1) {
-            const a = { description: description };
-            console.log(a);
-        }
-        else {
-            console.log("Error,Needs to be more than one character");
- 
-        }
-        event.target.elements.description.value = "";
- 
-        return (
-            <>
-                <form onSubmit={formMessages}>
-                    <div className='MessageInput'>
-                        <input name='description' placeholder='Message' />
- 
-                    </div>
-                    <button type='submit' className='btnSubmit'>Submit to Journal!</button>
- 
- 
- 
-                </form>
-                */
-
 
     return (
         <>
@@ -94,87 +102,74 @@ function JournalSquare() {
                 <div className='row'>
 
                     <div className='col-2  border-4' style={{ borderColor: 'black', borderStyle: 'solid' }}>
-                        <br></br>
-                        <p>
 
-                            Last Journal entry was <span> </span>
-                            <ReactTimeago date={Date.now()} />
+                        Last Journal entry was <span> </span>
+                        <ReactTimeago date={Date.now()} />
 
+                        <form onSubmit={friendsForm}>
+                            <br></br>
+                            <input type="text" name='name' placeholder="Enter friend here">
 
+                            </input>
 
+                            <div className="FriendButton">
+                                <button
+                                    type='submit'
+                                    style={{ width: '100%', backgroundColor: 'black', color: 'white', boxShadow: '100%' }}
+                                >
+                                    Add
+                                </button>
+                                <ul>
+                                    {
+                                        friends.map((item) => {
+                                            return (
+                                                <div className='border'>
 
-                            <form onSubmit={submitForm}>
-                                <br></br>
-                                <input type="text" placeholder="Enter friend here">
+                                                    <ul>
+                                                        {item.userName}
+                                                    </ul>
+                                                </div>
+                                            );
+                                        })
 
-                                </input>
+                                    }
+                                </ul>
+                            </div>
 
-                                <div className="FriendButton">
-                                    <button
-                                        type='submit'
-                                        style={{ width: '100%', backgroundColor: 'black', color: 'white', boxShadow: '100%' }}
-                                    >
-                                        Add
-                                    </button>
-
-
-
-
-
-                                </div>
-
-                            </form>
-                        </p>
-
-
+                        </form>
                     </div>
-
                     <div className='col-10'>
 
-
-
-
-
-
+                        <div class="btn-group dropup">
+                            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Friend
+                            </button>
+                            <div class="dropdown-menu">
+                                <a href=''/>
+                            </div>
+                        </div>
 
                         <div style={{
-                            backgroundColor: 'white', height: 500, overflowY: 'auto', overflowx: 'hidden', border: '2px', borderColor: 'black', borderStyle: 'solid'
+                            backgroundColor: 'pink', height: 500, overflowY: 'auto', overflowx: 'hidden', border: '2px', borderColor: 'black', borderStyle: 'solid'
                         }}
                         >
-
                             {
-
                                 items.map((item) => {
                                     return (
                                         <div className='border'>
-
                                             <ul>
-                                                <Journal item={item} />
+                                                <Journal item={item} friend={friends} />
                                             </ul>
                                         </div>
                                     );
                                 })
-
                             }
-
-
-
-
-
                         </div>
-
-
-
-
 
                         <br></br>
                         <form onSubmit={submitForm}>
-
                             <textarea name="description" className="w-100" placeholder="Enter a message here">
-
                             </textarea>
-
-
                             <div className="ButtonPadding">
                                 <button
                                     type='submit'
@@ -182,24 +177,13 @@ function JournalSquare() {
                                 >
                                     Submit
                                 </button>
-
-
-
-
-
                             </div>
-
                         </form>
-
-
-
                     </div>
                 </div>
             </div>
+
         </>
-
-
-
     );
 
 }

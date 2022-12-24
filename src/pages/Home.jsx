@@ -22,17 +22,17 @@ function Home() {
             <div className='Container'>
                 <div className='AvatarPlacement'>
 
-                <span style={{ marginRight: '100%' }}>
-                    <Robohash
-                        name={RandomName}
-                        type={Type}
-                        size={70}
-                        background={1}
-                        gravatar={true} />
+                    <span style={{ marginRight: '100%' }}>
+                        <Robohash
+                            name={RandomName}
+                            type={Type}
+                            size={70}
+                            background={1}
+                            gravatar={true} />
 
-                </span>
+                    </span>
                 </div>
-                <div>
+                
                     <div className='AvatarButtons'>
                         <button style={{ fontSize: '10px', borderColor: "black", backgroundColor: 'white' }} onClick={() => {
                             setRandom(Math.random() + 1).toString(36).substring(7);
@@ -53,8 +53,12 @@ function Home() {
                 </div>
 
 
+
+
+
                 <div className='row' >
 
+                  
 
 
 
@@ -67,7 +71,7 @@ function Home() {
 
                     </div>
                 </div>
-            </div>
+            
 
 
 
