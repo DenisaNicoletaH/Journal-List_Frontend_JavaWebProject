@@ -94,17 +94,48 @@ function JournalSquare() {
                 <div className='row'>
 
                     <div className='col-2  border-4' style={{ borderColor: 'black', borderStyle: 'solid' }}>
+                        <br></br>
                         <p>
+
                             Last Journal entry was <span> </span>
                             <ReactTimeago date={Date.now()} />
+
+
+
+
+                            <form onSubmit={submitForm}>
+                                <br></br>
+                                <input type="text" placeholder="Enter friend here">
+
+                                </input>
+
+                                <div className="FriendButton">
+                                    <button
+                                        type='submit'
+                                        style={{ width: '100%', backgroundColor: 'black', color: 'white', boxShadow: '100%' }}
+                                    >
+                                        Add
+                                    </button>
+
+
+
+
+
+                                </div>
+
+                            </form>
                         </p>
+
+
                     </div>
+
                     <div className='col-10'>
-                        <div className='border border-4 col-2'
-                            style={{ borderColor: 'black' }}>
 
 
-                        </div>
+
+
+
+
 
                         <div style={{
                             backgroundColor: 'white', height: 500, overflowY: 'auto', overflowx: 'hidden', border: '2px', borderColor: 'black', borderStyle: 'solid'

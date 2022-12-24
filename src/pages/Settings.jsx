@@ -42,7 +42,8 @@ function Settings() {
                 <div>
                     <button className="ColorChangebtn" onClick={() => { setToggle(!toggle); }}>Change Color </button>
                     {toggle && <Sketch
-                        style={{ textAlign: 'center' }}
+                        style={{ textAlign: 'center', width: '100%', }}
+
                         color={hex}
                         onChange={(color) => {
                             setHex(color.hex);
@@ -60,18 +61,20 @@ function Settings() {
                     <button className="FontSizebtn" onClick={() => { setFontToggle(!fontToggle) }}> Font Size </button>
                     {fontToggle &&
                         <div>
-
+                            <br></br>
                             <button onClick={() => {
                                 setFontSize("10px");
                             }}>Small Font</button>
                             <br />
 
 
+                            <br></br>
                             <button onClick={() => {
                                 setFontSize("30px");
                             }}>Medium Font</button>
                             <br />
 
+                            <br></br>
                             <button onClick={() => {
                                 setFontSize("50px");
                             }}>Large Font</button>
@@ -93,18 +96,19 @@ function Settings() {
                         <div>
 
                             <div className='ButtonsFontWeight'>
-
+                                <br></br>
                                 <button onClick={() => {
                                     setFontWeight('100');
                                 }}>Light</button>
                                 <br />
 
-
+                                <br></br>
                                 <button onClick={() => {
                                     setFontWeight('400');
                                 }}>Normal</button>
                                 <br />
 
+                                <br></br>
                                 <button onClick={() => {
                                     setFontWeight('700');
                                 }}> Bold</button>

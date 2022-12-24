@@ -47,15 +47,22 @@ form {
     text-align: center;
 }
 
-.AvatarButtons {
-    padding-left: 30px;
-}
+
 
 
 .ButtonsFontWeight {
     border-color: white;
-    background-color: white;
     color: black;
     font-weight: bold;
+    
 
+}
+
+.AvatarButtons {
+    padding-left: 13px;
+}
+
+.AvatarPlacement {
+    padding-left: 60px;
+    padding-top: 20px;
 }

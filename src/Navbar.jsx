@@ -40,13 +40,13 @@ function Navbar() {
 
                     <div className="col-7 text-center">
 
-                        <h1>
+                        <h1 style={{}}>
                             Journal-List Of {person}
                         </h1>
 
+
+
                     </div>
-
-
                     <div className="col-1">
                         <button className="btn btn-secondary">
                             <Link style={{ textDecoration: 'none', color: "white" }} to="/Settings">Settings</Link>
@@ -72,6 +72,7 @@ function Navbar() {
                     <div className="col-1" style={{ marginTop: '-15px' }}>
                         {checked && <DateTime />}
                     </div>
+
                 </div>
 
 

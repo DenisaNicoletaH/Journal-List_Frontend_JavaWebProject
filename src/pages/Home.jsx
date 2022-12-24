@@ -20,6 +20,8 @@ function Home() {
 
 
             <div className='Container'>
+                <div className='AvatarPlacement'>
+
                 <span style={{ marginRight: '100%' }}>
                     <Robohash
                         name={RandomName}
@@ -29,15 +31,16 @@ function Home() {
                         gravatar={true} />
 
                 </span>
+                </div>
                 <div>
                     <div className='AvatarButtons'>
-                        <button style={{ fontSize: '15px', borderColor: "white", backgroundColor: 'lightgrey', marginLeft: '50px' }} onClick={() => {
+                        <button style={{ fontSize: '10px', borderColor: "black", backgroundColor: 'white' }} onClick={() => {
                             setRandom(Math.random() + 1).toString(36).substring(7);
                         }}>
                             Change Avatar
                         </button>
 
-                        <button style={{ fontSize: '15px', borderColor: "white", backgroundColor: 'lightgrey' }} onClick={() => {
+                        <button style={{ fontSize: '10px', borderColor: "black", backgroundColor: '' }} onClick={() => {
                             if (Type == "cat") {
                                 setType("robots");
                             } else {
