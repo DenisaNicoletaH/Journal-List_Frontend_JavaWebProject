@@ -7,12 +7,10 @@ import TimeAgo from './TimeAgo';
 function JournalSquare() {
 
     const [items, setItems] = useState([]);
+    const [friends, setFriends] = useState([]);
 
-    const [friends, setFriends] = useState([])
-
-
-
-    const loadTodosFromAPI = () => {
+    const loadTodosFromAPI = (id) => {
+        //GET
         //get the request messages
         axios.get('http://localhost:8080/api/messages')
             .then((response) => {
@@ -22,7 +20,7 @@ function JournalSquare() {
                 }
             })
             .catch(function (error) {
-                console.log("This is an error" + error.status)
+                console.log(error.status)
             })
 
 
@@ -35,20 +33,33 @@ function JournalSquare() {
                 }
             })
             .catch(function (error) {
-                console.log("This is an error" + error.status)
+                console.log(error.status)
             })
 
 
+        //get messages + friends
+        axios.get('http://localhost:8080/api/friends/' + id + '/messages')
+            .then((response) => {
+                if (response.status === 200) {
+                    setItems(response.data);
+                    console.log(response);
+                }
+            })
+            .catch(function (error) {
+                console.log(error.status)
+            })
     }
+
     useEffect(() => {
         loadTodosFromAPI();
 
     }, []);
 
 
-    const addItem = (item) => {
+    //POST
+    const addItem = (item, id) => {
 
-        axios.post('http://localhost:8080/api/messages', item)
+        axios.post('http://localhost:8080/api/friends/' + id + '/messages', item)
 
             .then(function (response) {
                 loadTodosFromAPI();
@@ -69,19 +80,36 @@ function JournalSquare() {
 
             })
             .catch(function (error) {
-                console.log('This is an error' + error);
+                console.log(error.status);
             })
     }
 
+    useEffect(() => {
+        loadTodosFromAPI();
+
+    }, []);
+
+    //PUT
+    const setComplete = (friendId, complete) => {
+        axios.put('http://localhost:8080/api/friends' + friendId, { complete: complete })
+            .then((response) => {
+                if (response.status == 200) {
+                    loadTodosFromAPI();
+                }
+            })
+            .catch(function (error) {
+                console.log(error.status)
+            })
 
 
-
+    }
 
     const submitForm = (event) => {
         event.preventDefault();
         var messageDescription = event.target.elements.description.value;
-        const a = { message: messageDescription };
-        addItem(a);
+        var userId = event.target.elements.name.value;
+        const a = { message: messageDescription, image: event.target.elements.url.value };
+        addItem(a, userId);
 
         event.target.elements.description.value = "";
 
@@ -96,6 +124,37 @@ function JournalSquare() {
 
     }
 
+    //get friend name for dropdown
+    const friendsDropdown = (event) => {
+        event.preventDefault();
+        const friendSelect = event.target.elements.name.value;
+        const friendId = event.target.elements.id.value;
+
+        const pickFriend = { id: friendId, userName: friendSelect };
+        addFriends(pickFriend);
+
+        event.target.elements.name.value = "";
+        event.target.elements.id.value = "";
+
+
+    }
+
+    const deleteMessage = (id) => {
+        axios.delete('http://localhost:8080/api/messages/' + id)
+            .then((response) => {
+                if (response.status == 200) {
+                    loadTodosFromAPI()
+                }
+            })
+            .catch(function (error) {
+                console.log("error" + error.status)
+
+            })
+
+
+
+    }
+
     return (
         <>
             <div className='container'>
@@ -103,7 +162,7 @@ function JournalSquare() {
 
                     <div className='col-2  border-4' style={{ borderColor: 'black', borderStyle: 'solid' }}>
 
-                        Last Journal entry was <span> </span>
+                        Last Journal modification was <span> </span>
                         <ReactTimeago date={Date.now()} />
 
                         <form onSubmit={friendsForm}>
@@ -128,7 +187,11 @@ function JournalSquare() {
                                                     <ul>
                                                         {item.userName}
                                                     </ul>
+                                                    <button onClick={() => {
+                                                        deleteMessage(item.id);
+                                                    }}>Delete</button>
                                                 </div>
+
                                             );
                                         })
 
@@ -140,17 +203,10 @@ function JournalSquare() {
                     </div>
                     <div className='col-10'>
 
-                        <div class="btn-group dropup">
-                            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Friend
-                            </button>
-                            <div class="dropdown-menu">
-                                <a href=''/>
-                            </div>
-                        </div>
+
 
                         <div style={{
-                            backgroundColor: 'pink', height: 500, overflowY: 'auto', overflowx: 'hidden', border: '2px', borderColor: 'black', borderStyle: 'solid'
+                            backgroundColor: "white", height: 500, overflowY: 'auto', overflowx: 'hidden', border: '2px', borderColor: 'black', borderStyle: 'solid', textAlign: 'center'
                         }}
                         >
                             {
@@ -158,8 +214,13 @@ function JournalSquare() {
                                     return (
                                         <div className='border'>
                                             <ul>
-                                                <Journal item={item} friend={friends} />
+                                                <Journal item={item} />
                                             </ul>
+                                            <div className='deleteButton'>
+                                                <button onClick={() => {
+                                                    deleteMessage(item.id);
+                                                }}>Delete</button>
+                                            </div>
                                         </div>
                                     );
                                 })
@@ -167,9 +228,26 @@ function JournalSquare() {
                         </div>
 
                         <br></br>
-                        <form onSubmit={submitForm}>
-                            <textarea name="description" className="w-100" placeholder="Enter a message here">
+                        <form onSubmit={submitForm} style={{ textAlign: 'center' }}>
+                            <textarea required name="description" className="w-75" placeholder="Enter a message here">
                             </textarea>
+                            <div className='urlInput'>
+                                <input name='url' required maxLength={255} placeholder='Enter a url for an image' />
+                                <select name='name' className='' >
+                                    {
+                                        friends.map((item) => {
+                                            return (
+
+                                                <option value={item.id}>
+                                                    {item.userName}
+                                                </option>
+                                            );
+                                        })
+
+                                    }
+                                </select>
+                            </div>
+
                             <div className="ButtonPadding">
                                 <button
                                     type='submit'
@@ -178,6 +256,7 @@ function JournalSquare() {
                                     Submit
                                 </button>
                             </div>
+
                         </form>
                     </div>
                 </div>
@@ -187,4 +266,5 @@ function JournalSquare() {
     );
 
 }
+
 export default JournalSquare;

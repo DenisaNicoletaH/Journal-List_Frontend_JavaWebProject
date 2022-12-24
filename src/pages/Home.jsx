@@ -32,46 +32,46 @@ function Home() {
 
                     </span>
                 </div>
-                
-                    <div className='AvatarButtons'>
-                        <button style={{ fontSize: '10px', borderColor: "black", backgroundColor: 'white' }} onClick={() => {
-                            setRandom(Math.random() + 1).toString(36).substring(7);
-                        }}>
-                            Change Avatar
-                        </button>
 
-                        <button style={{ fontSize: '10px', borderColor: "black", backgroundColor: '' }} onClick={() => {
-                            if (Type == "cat") {
-                                setType("robots");
-                            } else {
-                                setType("cat");
-                            }
-                        }}>
-                            Change Avatar Type
-                        </button>
-                    </div>
+                <div className='AvatarButtons'>
+                    <button style={{ fontSize: '10px', borderColor: "black", backgroundColor: 'white' }} onClick={() => {
+                        setRandom(Math.random() + 1).toString(36).substring(7);
+                    }}>
+                        Change Avatar
+                    </button>
+
+                    <button style={{ fontSize: '10px', borderColor: "black", backgroundColor: 'white' }} onClick={() => {
+                        if (Type == "cat") {
+                            setType("robots");
+                        } else {
+                            setType("cat");
+                        }
+                    }}>
+                        Change Avatar Type
+                    </button>
                 </div>
+            </div>
 
 
 
 
 
-                <div className='row' >
-
-                  
-
-
-
-                    <div className='col-12'>
-                        <JournalSquare />
+            <div className='row' >
 
 
 
 
 
-                    </div>
+                <div className='col-12'>
+                    <JournalSquare />
+
+
+
+
+
                 </div>
-            
+            </div>
+
 
 
 

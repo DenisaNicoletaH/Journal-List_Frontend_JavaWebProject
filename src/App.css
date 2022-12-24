@@ -54,7 +54,7 @@ form {
     border-color: white;
     color: black;
     font-weight: bold;
-    
+
 
 }
 
@@ -65,5 +65,12 @@ form {
 .AvatarPlacement {
     padding-left: 60px;
     padding-top: 20px;
+}
+
+.deleteButton {
+    border: 1px;
+    border-color: black;
+
+    
 }
 
