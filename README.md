@@ -1,70 +1,84 @@
-# Getting Started with Create React App
+The project's title: **Journal List.**
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The application consists of a personalized journal that a user can use and write their thoughts. It contains a Home and a Settings buttons for the navigation of the website.
 
-## Available Scripts
+**HOME PAGE**:
 
-In the project directory, you can run:
+On the main page: Home,the user will be asked to input a name,so it specifies whom is using the journal.Also,on the same page,the user will be able to input their desired message as well as url(image) in texboxes. In addition to that,the user will be able to add friends,on the left border,underneath the avatar that is specific to the user.Delete buttons are included so the user can delete the messages desired as well as the friends. There is also a Heart Switch that,when clicked, it shows the current(live) time 
 
-### `npm start`
+**SETTINGS PAGE**:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+In the Settings Page, the possibility to change the color of the app, the font size and the font weight is present with the click of a button.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+**Features**:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+* Avatar 
+* User's name on the Journal
+* Add Friends
+* Change the Color,the Font Size and the Font Weight of the app, in Settings.
 
-### `npm run build`
+**Back-End part of the project:** https://github.com/DenisaNicoletaH/JournalListFinalJavaWeb 
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+**Libraries Used**:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+https://github.com/fel1xw/react-robohash
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+https://github.com/anatoliygatt/heart-switch
 
-### `npm run eject`
+https://reactrouter.com/en/main
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+https://github.com/elrumordelaluz/coloreact
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+https://github.com/nmn/react-timeago
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+With the use of Visual Studio Code, the frontend  application was made using React.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+It was built using components,props as well as hooks.It also contains Axios so the BackEnd makes the HTTP request to the frontend.The project contains 6 libraries: Robo-Hash(for the avatar), The Routing, the Heart Switch(For the time),TimeAgo(for the Latest Update Time) and the ColorReact(changes the pages color)
 
-## Learn More
+**Running the Application**:
+In order to run the application,the BackEnd of the project must be running so the frontent can receive the HTTP requests.By inserting messages,url and adding friends since Axios has the possiblity to make many requests.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+**Challenges Faced**:
+The challenges faced was coming up with ideas of implementation as well as implementing certain functions such as implementing the name that displays on the title since I had no idea how.I did research in order to come to a conclusion. This is the solution implemented:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```
+function Navbar() {
+    const [checked, setChecked] = useState(false);
+    const [person, setPerson] = useState(false);
+    //for  displaying the robot avatar
+    const [display, setDisplay] = useState(false);
+    useEffect(() => {
+        setPerson(prompt("Please enter your name"));
+    }, []);
+    
+    const [RandomName, setRandom] = useState((Math.random() + 1).toString(36).substring(7));
+    const [Type, setType] = useState("cat");
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
+    return (
+        <nav className="border" style={{ height: '100px', padding: '30px' }}>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+            <div className="container">
+                <div className="row">
 
-### Advanced Configuration
+                    <div className="col-2">
+                        <button className="btn btn-secondary">
+                            <Link style={{ textDecoration: 'none', color: "white" }} to="/">Home</Link>
+                        </button>
+                    </div>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+                    <div className="col-7 text-center">
 
-### Deployment
+                        <h1 style={{}}>
+                            Journal-List Of {person}
+                        </h1>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-### `npm run build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+                    </div>
+```
+If I had more time I would've tried to implement the time that the message was posted.  I tried doing it with the TimeAgo library but the time value would always reset whenever a new message was inputed.
