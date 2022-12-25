@@ -19,7 +19,6 @@ function Settings() {
     const [userInput, setUserInput] = useState(true);
 
 
-    //I want 100
 
     useEffect(() => {
         document.body.style.backgroundColor = hex;
