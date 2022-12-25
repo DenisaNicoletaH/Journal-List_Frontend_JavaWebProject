@@ -91,6 +91,7 @@ function Settings() {
 
                 <div>
                     <br></br>
+                    <br></br>
                     <button className="FontWeight" onClick={() => { setFontWeight(!fontWeight) }}> FontWeight</button>
                     {fontWeight &&
                         <div>

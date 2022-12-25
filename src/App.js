@@ -10,12 +10,11 @@ function App() {
 
     <div>
 
-      <DateTime></DateTime>
+        <DateTime></DateTime>
 
-      <Layout> </Layout>
+        <Layout> </Layout>
 
-      <JournalSquare> </JournalSquare>
-
+        <JournalSquare> </JournalSquare>
 
     </div>
 

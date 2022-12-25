@@ -4,19 +4,22 @@ import axios from 'axios'
 import ReactTimeago from 'react-timeago';
 import TimeAgo from './TimeAgo';
 
+
+
 function JournalSquare() {
 
-    const [items, setItems] = useState([]);
-    const [friends, setFriends] = useState([]);
 
-    const loadTodosFromAPI = (id) => {
+    const [messages, setMessages] = useState([]);
+    const [friends, setFriends] = useState([]);
+    const [favourite, setFavourite] = useState([])
+
+    const loadMessageFromAPI = (id) => {
         //GET
         //get the request messages
         axios.get('http://localhost:8080/api/messages')
             .then((response) => {
                 if (response.status === 200) {
-                    setItems(response.data);
-                    console.log(response);
+                    setMessages(response.data);
                 }
             })
             .catch(function (error) {
@@ -29,45 +32,43 @@ function JournalSquare() {
             .then((response) => {
                 if (response.status === 200) {
                     setFriends(response.data);
-                    console.log(response);
                 }
             })
             .catch(function (error) {
                 console.log(error.status)
             })
 
-
-        //get messages + friends
-        axios.get('http://localhost:8080/api/friends/' + id + '/messages')
-            .then((response) => {
-                if (response.status === 200) {
-                    setItems(response.data);
-                    console.log(response);
-                }
-            })
-            .catch(function (error) {
-                console.log(error.status)
-            })
     }
 
     useEffect(() => {
-        loadTodosFromAPI();
+        loadMessageFromAPI();
 
     }, []);
 
 
     //POST
-    const addItem = (item, id) => {
+    const addItem = (message, id) => {
+        if (id != null && id != "") {
+            axios.post('http://localhost:8080/api/friends/' + id + '/messages', message)
 
-        axios.post('http://localhost:8080/api/friends/' + id + '/messages', item)
+                .then(function (response) {
+                    loadMessageFromAPI();
 
-            .then(function (response) {
-                loadTodosFromAPI();
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
+        } else {
+            axios.post('http://localhost:8080/api/messages', message)
 
-            })
-            .catch(function (error) {
-                console.log(error);
-            })
+                .then(function (response) {
+                    loadMessageFromAPI();
+
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
+        }
     }
 
 
@@ -76,7 +77,7 @@ function JournalSquare() {
         axios.post('http://localhost:8080/api/friends', friend)
 
             .then(function (response) {
-                loadTodosFromAPI();
+                loadMessageFromAPI();
 
             })
             .catch(function (error) {
@@ -85,16 +86,19 @@ function JournalSquare() {
     }
 
     useEffect(() => {
-        loadTodosFromAPI();
+        loadMessageFromAPI();
 
     }, []);
 
     //PUT
-    const setComplete = (friendId, complete) => {
-        axios.put('http://localhost:8080/api/friends' + friendId, { complete: complete })
+    const setComplete = (friendId, favourite, userName) => {
+        axios.put('http://localhost:8080/api/friends/' + friendId, {
+            userName: userName,
+            favourite: !favourite
+        })
             .then((response) => {
                 if (response.status == 200) {
-                    loadTodosFromAPI();
+                    loadMessageFromAPI();
                 }
             })
             .catch(function (error) {
@@ -102,6 +106,35 @@ function JournalSquare() {
             })
 
 
+    }
+
+    //Delete
+
+    const deleteMessage = (id) => {
+        axios.delete('http://localhost:8080/api/messages/' + id)
+            .then((response) => {
+                if (response.status == 200) {
+                    loadMessageFromAPI()
+                }
+            })
+            .catch(function (error) {
+                console.log(error.status)
+
+            })
+    }
+
+    const deleteFriend = (friendId) => {
+        axios.delete('http://localhost:8080/api/friends/' + friendId)
+            .then((response) => {
+                if (response.status == 200) {
+                    console.log(response)
+                    loadMessageFromAPI()
+                }
+            })
+            .catch(function (error) {
+                console.log(error.status)
+
+            })
     }
 
     const submitForm = (event) => {
@@ -139,28 +172,17 @@ function JournalSquare() {
 
     }
 
-    const deleteMessage = (id) => {
-        axios.delete('http://localhost:8080/api/messages/' + id)
-            .then((response) => {
-                if (response.status == 200) {
-                    loadTodosFromAPI()
-                }
-            })
-            .catch(function (error) {
-                console.log("error" + error.status)
-
-            })
 
 
 
-    }
 
     return (
         <>
             <div className='container'>
                 <div className='row'>
 
-                    <div className='col-2  border-4' style={{ borderColor: 'black', borderStyle: 'solid' }}>
+
+                    <div className='col-12 col-md-2  border-4' style={{ borderColor: 'black', borderStyle: 'solid' }}>
 
                         Last Journal modification was <span> </span>
                         <ReactTimeago date={Date.now()} />
@@ -178,30 +200,39 @@ function JournalSquare() {
                                 >
                                     Add
                                 </button>
-                                <ul>
-                                    {
-                                        friends.map((item) => {
-                                            return (
-                                                <div className='border'>
 
-                                                    <ul>
-                                                        {item.userName}
-                                                    </ul>
-                                                    <button onClick={() => {
-                                                        deleteMessage(item.id);
-                                                    }}>Delete</button>
-                                                </div>
-
-                                            );
-                                        })
-
-                                    }
-                                </ul>
                             </div>
 
                         </form>
+                        <ul>
+                            {
+
+                                friends.map((friend) => {
+                                    console.log(friend.id)
+                                    return (
+
+                                        < div className='border'  >
+
+                                            <li onClick={() => {
+                                                setComplete(friend.id, friend.favourite, friend.userName);
+                                            }}>
+                                                {friend.userName}
+                                                {friend.favourite && <div> is a favourite</div>}
+                                            </li>
+                                            <div className='DeleteMessagebtn'>
+                                                <button onClick={() => {
+                                                    deleteFriend(friend.id)
+                                                }} style={{ backgroundColor: 'red' }}>Delete</button>
+                                            </div>
+                                        </div>
+
+                                    );
+                                })
+
+                            }
+                        </ul>
                     </div>
-                    <div className='col-10'>
+                    <div className='col-12 col-md-10'>
 
 
 
@@ -210,16 +241,16 @@ function JournalSquare() {
                         }}
                         >
                             {
-                                items.map((item) => {
+                                messages.map((messages) => {
                                     return (
                                         <div className='border'>
                                             <ul>
-                                                <Journal item={item} />
+                                                <Journal item={messages} />
                                             </ul>
                                             <div className='deleteButton'>
                                                 <button onClick={() => {
-                                                    deleteMessage(item.id);
-                                                }}>Delete</button>
+                                                    deleteMessage(messages.id);
+                                                }} style={{ backgroundColor: 'red', textAlign: 'center', marginLeft: '93%' }}>Delete</button>
                                             </div>
                                         </div>
                                     );
@@ -229,17 +260,20 @@ function JournalSquare() {
 
                         <br></br>
                         <form onSubmit={submitForm} style={{ textAlign: 'center' }}>
-                            <textarea required name="description" className="w-75" placeholder="Enter a message here">
+                            <textarea required name="description" className="w-75" placeholder="Enter a message here" style={{ borderColor: 'black' }}>
                             </textarea>
+                            <br></br>
                             <div className='urlInput'>
-                                <input name='url' required maxLength={255} placeholder='Enter a url for an image' />
-                                <select name='name' className='' >
+                                <input name='url' required placeholder='Enter a url for an image' style={{ width: '100%', borderColor: 'black' }} />
+                                <br></br>
+                                <select name='name' className='SelectFriend'>
+                                    <option value={""}>None</option>
                                     {
-                                        friends.map((item) => {
+                                        friends.map((message) => {
                                             return (
 
-                                                <option value={item.id}>
-                                                    {item.userName}
+                                                <option value={message.id}>
+                                                    {message.userName}
                                                 </option>
                                             );
                                         })
@@ -248,7 +282,7 @@ function JournalSquare() {
                                 </select>
                             </div>
 
-                            <div className="ButtonPadding">
+                            <div className="ButtonPadding" >
                                 <button
                                     type='submit'
                                     style={{ width: '100%', backgroundColor: 'black', color: 'white', boxShadow: '100%' }}
@@ -260,7 +294,7 @@ function JournalSquare() {
                         </form>
                     </div>
                 </div>
-            </div>
+            </div >
 
         </>
     );

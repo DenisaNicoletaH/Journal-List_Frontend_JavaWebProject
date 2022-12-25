@@ -12,16 +12,17 @@ function Journal({ item, setComplete }) {
 
     console.log(item);
     return (
-        <div className='ItemDescription container'>
+
+        <div className='ItemDescription container' style={{ textAlign: 'center' }}>
             <div className='row'>
-                <div className='col-4'>
+                <div className='col-4' >
                     {item.description}
                 </div>
-                <div className='col-3'>
+                <div className='col-3' style={{ textAlign: 'center', fontWeight: 'bold' }}>
                     {item.friend != null && item.friend.userName}
                 </div>
 
-                <div className='col-5'>
+                <div className='col-5' style={{ textAlign: 'left', fontWeight: 'bold' }}>
                     {item.image != null && <img src={item.image.url} style={{ width: '150px', paddingTop: '20px', textAlign: 'center' }} />}
                 </div>
             </div>
