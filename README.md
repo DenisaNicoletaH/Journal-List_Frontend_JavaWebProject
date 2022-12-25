@@ -82,3 +82,26 @@ function Navbar() {
                     </div>
 ```
 If I had more time I would've tried to implement the time that the message was posted.  I tried doing it with the TimeAgo library but the time value would always reset whenever a new message was inputed.
+Showcase of the App (FrontEnd):
+
+
+
+
+![image](https://user-images.githubusercontent.com/91993350/209454354-5b7e53b9-c290-4d4c-a7bc-f4e757f1dd35.png)
+
+
+![image](https://user-images.githubusercontent.com/91993350/209454332-8d559d44-b402-4bb0-8f86-2959124b8c53.png)
+
+The Settings Page:
+
+![image](https://user-images.githubusercontent.com/91993350/209454303-eac86759-a188-4768-b33c-eb42d7c8efcb.png)
+
+
+On Mobile:
+
+![image](https://user-images.githubusercontent.com/91993350/209454533-c7f7b2ad-2ac9-4a4c-a466-13b4b65d87f3.png)
+
+
+![image](https://user-images.githubusercontent.com/91993350/209454551-19ed9513-5e05-4d00-ba3a-95f1a527ba86.png)
+
+
